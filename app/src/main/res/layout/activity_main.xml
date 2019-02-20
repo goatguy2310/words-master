@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txtMaster"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtName"
+        android:text="@string/welcome"
+        android:textColor="#00c52e"
+        android:textSize="45dp"
+        android:layout_marginTop="0dp"/>
+
+    <EditText
+        android:id="@+id/txtName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Type Name Here"
+        android:inputType="textPersonName"
+        android:layout_above="@+id/btnPlay"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ImageButton
+        android:id="@+id/btnPlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/play_button"
+        android:layout_above="@+id/btnHigh"
+        android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:id="@+id/btnHigh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/high_score_button"
+        android:layout_above="@+id/btnGuide"
+        android:layout_alignLeft="@+id/btnPlay"
+        android:layout_alignStart="@+id/btnPlay" />
+
+    <ImageButton
+        android:id="@+id/btnGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/how_button"
+        android:layout_above="@+id/btnAbout"
+        android:layout_alignLeft="@+id/btnHigh"
+        android:layout_alignStart="@+id/btnHigh" />
+
+    <ImageButton
+        android:id="@+id/btnAbout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/settings_button"
+        android:layout_above="@+id/btnQuit"
+        android:layout_alignLeft="@+id/btnGuide"
+        android:layout_alignStart="@+id/btnGuide" />
+
+    <ImageButton
+        android:id="@+id/btnQuit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/quit_button"
+        android:layout_above="@+id/imageView3"
+        android:layout_alignLeft="@+id/btnAbout"
+        android:layout_alignStart="@+id/btnAbout" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <ImageView
+            android:id="@+id/imgIcon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            app:srcCompat="@drawable/goat_icon_small" />
+    </RelativeLayout>
+
+</LinearLayout>

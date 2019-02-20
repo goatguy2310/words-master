@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.tundt.main.SettingsActivity">
+
+    <TextView
+        android:id="@+id/txtLevel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foregroundTint="#004cff"
+        android:gravity="center"
+        android:text="Set Level"
+        android:textColor="#000000"
+        android:textSize="25dp" />
+
+    <RadioGroup
+        android:id="@+id/group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtLevel"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true">
+
+        <RadioButton
+            android:id="@+id/rbOne"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foregroundTint="#4e5aff"
+            android:text="Easy"
+            android:textColor="#00ff0d"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/rbTwo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hard"
+            android:textColor="#ec9d00"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/rbThree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Expert"
+            android:textColor="#ec0000"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+    </RadioGroup>
+
+</RelativeLayout>
