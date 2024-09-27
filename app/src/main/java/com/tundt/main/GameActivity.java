@@ -18,7 +18,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -36,7 +35,6 @@ import android.widget.Toast;
 import com.tundt.adapter.TextAdapter;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -71,8 +69,6 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private MediaPlayer player;
 
-    private boolean lose = false;
-
     private Toast toast;
 
     @Override
@@ -87,9 +83,8 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
 
         alphabet = asList(getResources().getStringArray(R.array.alphabet));
 
-        addControls();
         generatePickingLetter();
-        Log.i(TAG, "" + gridText.getChildAt(95));
+        addControls();
     }
 
     public String getLevel() {
@@ -102,7 +97,6 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
         createTimer();
         try {
             String music_source = "music.mp3";
-            if(level.equals("Expert")) music_source = "music_speed_up.mp3";
 
             AssetFileDescriptor afd = getAssets().openFd("music/" + music_source);
             player = new MediaPlayer();
@@ -146,7 +140,6 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
     private void createTimer() {
         int delay = 1000;
 
-        if(level.equals("Expert")) delay = 1000;
         timer = new CountDownTimer(time, delay) {
             @Override
             public void onTick(long l) {
@@ -207,21 +200,30 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
                 String text = "" + words.charAt(i);
                 textsArr.add(text);
             }
-            adapterTexts.notifyDataSetChanged();
         } else if (level.equals("Hard")) {
             Random r = new Random();
             for (int i = 0; i < Const.NUMBER_PICKING_LETTER; i++) {
                 String text = alphabet.get(r.nextInt(alphabet.size()));
                 textsArr.add(text);
-                adapterTexts.notifyDataSetChanged();
             }
-        } else if(level.equals("Expert")) {
-            Random r = new Random();
+        } else if(level.equals("Custom (From word list)")) {
+            String words = "";
+            Cursor c = Const.noteDatabase.query("notes", null, null, null, null, null, null, null);
+            while (words.length() < Const.NUMBER_PICKING_LETTER) {
+                while(c.moveToNext()) {
+                    words += c.getString(1);
+                }
+                words += alphabet.get(new Random().nextInt(alphabet.size()));
+            }
+            if (words.length() > Const.NUMBER_PICKING_LETTER) {
+                words = words.substring(0, 96);
+            }
+            words = words.toUpperCase();
+            words = shuffle(words);
             for (int i = 0; i < Const.NUMBER_PICKING_LETTER; i++) {
-                String text = alphabet.get(r.nextInt(alphabet.size()));
+                String text = "" + words.charAt(i);
                 textsArr.add(text);
             }
-            adapterTexts.notifyDataSetChanged();
         }
     }
 
@@ -255,25 +257,16 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
                 String word = txtText.getText().toString().trim();
                 if(word.isEmpty()) break;
 
-                if(level.equals("Expert")) {
-                    Collections.shuffle(textsArr);
-
-                    adapterTexts.notifyDataSetChanged();
-                }
-
                 if (app.words[alphabet.indexOf("" + word.charAt(0))].contains(word)) {
                     playSound("true");
                     txtText.setText("");
-                    timer.cancel();
-                    timer.start();
                     int length = word.length();
-                    if (level.equals("Easy")) score = (int) (score + (5 * length));
+                    if (level.equals("Easy") || level.equals("Custom (From word list)")) score = (int) (score + (5 * length));
                     else if (level.equals("Hard")) score = (int) (score + (8 * length));
-                    else if (level.equals("Expert")) score = (int) (score + (10 * length));
                     txtScore.setText("" + score);
                     txtResult.append("" + word + " | ");
                     showToast(R.drawable.true_img);
-                    int i = new Random().nextInt(2);
+                    int i = new Random().nextInt(1);
                     if (i == 0 && score >= 50 && level.equals("Easy")) {
                         int power = new Random().nextInt(2);
                         if (power == 0) {
@@ -281,8 +274,9 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
                             addText();
                         } else if (power == 1) {
                             int timeNum = 30;
-                            if(level.equals("Hard")) timeNum = 10;
+                            if(level.equals("Hard")) timeNum = 15;
 
+                            time = 30;
                             time += new Random().nextInt(timeNum);
                             showToast(R.drawable.time);
                             txtTime.setTextColor(Color.GREEN);
@@ -309,18 +303,9 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
                             animate.start();
                         }
                     }
-
-                    int r = new Random().nextInt(5);
-                    if (r == 0 && score >= 75 && length >= 3 && level.equals("Expert")) {
-                        int power = new Random().nextInt(2);
-                        if (power == 3) {
-                            showToast(R.drawable.text);
-                            addText();
-                        }
-                    }
+                    timer.cancel();
+                    timer.start();
                 } else {
-                    if(level.equals("Expert")) time -= 3;
-
                     playSound("wrong");
                     txtText.setTextColor(Color.RED);
                     ObjectAnimator anim = ObjectAnimator.ofInt(txtText, "textColor", Color.RED, Color.BLACK);
@@ -565,7 +550,7 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
             int place = 6;
             boolean newBest = false;
 
-            Cursor cursor = Const.database.query("scores", null, null, null, null, null, null);
+            Cursor cursor = Const.scoreDatabase.query("scores", null, null, null, null, null, null);
 
             cursor.moveToPosition(5);
 
@@ -587,7 +572,7 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
                     ContentValues row = new ContentValues();
                     row.put("score", score);
                     row.put("name", name);
-                    Const.database.update("scores", row, "place=?", new String[]{String.valueOf(placeNum + 1)});
+                    Const.scoreDatabase.update("scores", row, "place=?", new String[]{String.valueOf(placeNum + 1)});
                 }
             }
 
@@ -595,7 +580,7 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
                 ContentValues row = new ContentValues();
                 row.put("score", GameActivity.this.score);
                 row.put("name", this.name);
-                Const.database.update("scores", row, "place=?", new String[]{String.valueOf(place)});
+                Const.scoreDatabase.update("scores", row, "place=?", new String[]{String.valueOf(place)});
             }
 
             cursor.close();

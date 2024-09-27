@@ -3,6 +3,7 @@
     package="com.tundt.main">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.SET_ALARM" />
 
     <application
         android:name=".MyApplication"
@@ -11,10 +12,12 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".GuessActivity" />
+        <activity android:name=".AddActivity" />
+        <activity android:name=".NoteActivity" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="sensorPortrait">
-        </activity>
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".GameActivity"
             android:screenOrientation="sensorPortrait"
@@ -25,9 +28,11 @@
         <activity
             android:name=".HighActivity"
             android:screenOrientation="sensorPortrait" />
-        <activity android:name=".SettingsActivity"
-            android:screenOrientation="sensorPortrait"/>
-        <activity android:name=".SplashActivity"
+        <activity
+            android:name=".SettingsActivity"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".SplashActivity"
             android:screenOrientation="sensorPortrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,6 +40,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name=".NotificationReceiver"/>
     </application>
 
 </manifest>

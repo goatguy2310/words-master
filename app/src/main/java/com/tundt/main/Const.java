@@ -1,18 +1,6 @@
 package com.tundt.main;
 
-import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.AsyncTask;
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  * Created by DAT_HOME_HP on 03/06/2017.
@@ -37,7 +25,8 @@ public class Const {
     public static final String SCORE = "score";
     public static final String SETTINGS = "settings";
 
-    public static SQLiteDatabase database = null;
+    public static SQLiteDatabase scoreDatabase = null;
+    public static SQLiteDatabase noteDatabase = null;
 
     //Settings
 

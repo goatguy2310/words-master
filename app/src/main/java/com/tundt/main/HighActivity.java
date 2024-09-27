@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -12,15 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.tundt.adapter.HighAdapter;
 import com.tundt.model.HighScore;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 
 public class HighActivity extends AppCompatActivity {
@@ -63,11 +57,11 @@ public class HighActivity extends AppCompatActivity {
                 alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                Const.database = openOrCreateDatabase(data_name, MODE_PRIVATE, null);
+                                Const.scoreDatabase = openOrCreateDatabase(data_name, MODE_PRIVATE, null);
                                 ContentValues value = new ContentValues();
                                 value.put("score", 0);
                                 value.put("name", "-");
-                                Const.database.update("scores", value, null, null);
+                                Const.scoreDatabase.update("scores", value, null, null);
                                 showScores();
                             }
                         });
@@ -82,8 +76,8 @@ public class HighActivity extends AppCompatActivity {
     }
 
     public void showScores() {
-        Const.database = openOrCreateDatabase(data_name, MODE_PRIVATE, null);
-        Cursor cursor = Const.database.query("scores", null, null, null, null, null, null);
+        Const.scoreDatabase = openOrCreateDatabase(data_name, MODE_PRIVATE, null);
+        Cursor cursor = Const.scoreDatabase.query("scores", null, null, null, null, null, null);
         highArr.clear();
         while(cursor.moveToNext()) {
             String place = cursor.getString(0);

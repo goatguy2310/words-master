@@ -32,45 +32,60 @@
         android:id="@+id/btnPlay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/play_button"
         android:layout_above="@+id/btnHigh"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/holo_orange_light"
+        app:srcCompat="@drawable/play_button" />
 
     <ImageButton
         android:id="@+id/btnHigh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/high_score_button"
         android:layout_above="@+id/btnGuide"
+        android:layout_alignStart="@+id/btnPlay"
         android:layout_alignLeft="@+id/btnPlay"
-        android:layout_alignStart="@+id/btnPlay" />
+        android:background="@android:color/holo_orange_light"
+        app:srcCompat="@drawable/high_score_button" />
 
     <ImageButton
         android:id="@+id/btnGuide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/how_button"
         android:layout_above="@+id/btnAbout"
+        android:layout_alignStart="@+id/btnHigh"
         android:layout_alignLeft="@+id/btnHigh"
-        android:layout_alignStart="@+id/btnHigh" />
+        android:background="@android:color/holo_orange_light"
+        app:srcCompat="@drawable/how_button" />
+
+    <ImageButton
+        android:id="@+id/btnLearn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnAbout"
+        android:layout_alignStart="@+id/btnHigh"
+        android:layout_alignLeft="@+id/btnHigh"
+        android:background="@android:color/holo_orange_light"
+        app:srcCompat="@drawable/learn_button" />
 
     <ImageButton
         android:id="@+id/btnAbout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/settings_button"
         android:layout_above="@+id/btnQuit"
+        android:layout_alignStart="@+id/btnGuide"
         android:layout_alignLeft="@+id/btnGuide"
-        android:layout_alignStart="@+id/btnGuide" />
+        android:background="@android:color/holo_orange_light"
+        app:srcCompat="@drawable/settings_button" />
 
     <ImageButton
         android:id="@+id/btnQuit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/quit_button"
         android:layout_above="@+id/imageView3"
+        android:layout_alignStart="@+id/btnAbout"
         android:layout_alignLeft="@+id/btnAbout"
-        android:layout_alignStart="@+id/btnAbout" />
+        android:background="@android:color/holo_orange_light"
+        app:srcCompat="@drawable/quit_button" />
 
     <RelativeLayout
         android:layout_width="match_parent"

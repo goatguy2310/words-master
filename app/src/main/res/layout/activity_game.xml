@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context="com.tundt.main.GameActivity">
 
+    <GridView
+        android:id="@+id/grid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/linear"
+        android:numColumns="8" />
+
     <LinearLayout
         android:id="@+id/linear"
         android:layout_width="match_parent"
@@ -72,7 +79,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@android:drawable/ic_menu_view" />
+                app:srcCompat="@android:drawable/ic_menu_send" />
 
             <EditText
                 android:id="@+id/txtText"
@@ -93,14 +100,6 @@
 
         </LinearLayout>
     </LinearLayout>
-
-    <GridView
-        android:id="@+id/grid"
-        android:padding="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/linear"
-        android:numColumns="8" />
 
 
 </RelativeLayout>

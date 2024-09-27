@@ -22,9 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtLevel"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentLeft="true">
 
         <RadioButton
             android:id="@+id/rbOne"
@@ -49,10 +48,34 @@
             android:id="@+id/rbThree"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Expert"
+            android:text="Custom (From word list)"
             android:textColor="#ec0000"
             android:textSize="20dp"
             android:textStyle="bold" />
+
     </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/group"
+        android:background="#5D5D5D" />
+
+    <CheckBox
+        android:id="@+id/chkRemind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView4"
+        android:text="Reminds me my notes" />
+
+    <EditText
+        android:id="@+id/txtRemind"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chkRemind"
+        android:hint="Every hour(s)"
+        android:ems="10"
+        android:inputType="number" />
 
 </RelativeLayout>
