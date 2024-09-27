@@ -6,7 +6,7 @@
 
 **Warning: Although it is possible to install the app on higher versions of Android, the target highest API level is Android 9.**
 
-An app desgined to test your English vocabulary range and to help you with expanding your word knowledge.
+An app designed to test your English vocabulary range and to help you with expanding your word knowledge.
 This app was made with Android Studio in 2017/2018.
 
 # Installation
